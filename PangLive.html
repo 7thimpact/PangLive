@@ -1,31 +1,195 @@
-<body style="width: 338px; height: 400px; margin: 0; padding: 10px;">
-    <meta charset="UTF-8">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
+    width: 338px;
+    min-height: 400px;
+    margin: 0;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: 14px;
+    background: #fff;
+    color: #000;
+  }
 
-    <!-- Code and all that -->
-        <h1 style="text-align: center;">🐧 PangLive Real-Time Collab</h1>
-        <div class="container">
-        <div class="row">
-        <div class="col-12">
-        <div class="card">
-        <h3 class="card-header" style="padding-left: 30px; text-align: center;"><strong><em>Pang Live Ver.0.1.0</em></strong><br />Currently in a <span style="text-decoration: underline;">very alpha alpha alpha</span> stage</h3>
-        <hr />
-        <div class="card-footer" style="text-align: center;">To use, please <span style="text-decoration: underline;">check</span> the mark.</div>
-        </div>
-        <div class="form-check" style="padding-left: 30px; text-align: center;"><input id="form-check-0056ed5d-8807-4714-a12b-4c02541b4730" class="form-check-input" type="checkbox" /> <label class="form-check-label" for="form-check-0056ed5d-8807-4714-a12b-4c02541b4730"><label class="form-check-label" for="form-check-0056ed5d-8807-4714-a12b-4c02541b4730"> I understand that in hosting or joining a session;<br /><span style="text-decoration: underline;"><span style="color: #ff0000; text-decoration: underline;">My IP address is shared with others.</span></span></label></label><span style="color: #ff0000;"><label class="form-check-label" for="form-check-0056ed5d-8807-4714-a12b-4c02541b4730"><br /> </label></span></div>
-        <hr />
-        <ul>
-        <li style="text-align: left;">Privacy Policy</li>
-        <li style="text-align: left;">Support Server</li>
-        <li style="text-align: left;">Donate to 7thImpact</li>
-        <li style="text-align: left;"><a href="https://penguinmod.com/support">Donate to PenguinMod</a>&nbsp;</li>
-        </ul>
-        <hr />
-        <p>&nbsp;</p>
-        <button class="btn btn-success" type="button"> Host Room </button>&nbsp;</div>
-        <div class="col-12">&nbsp;</div>
-        <div class="col-12">&nbsp;</div>
-        <div class="col-12"><button class="btn btn-success" type="button">Join Room </button></div>
-        </div>
-        </div>
+  h1 { text-align: center; font-size: 16px; margin-bottom: 8px; }
 
+  hr { margin: 8px 0; border: none; border-top: 1px solid #ccc; }
+
+  .version { text-align: center; font-size: 13px; margin-bottom: 4px; }
+  .alpha   { text-align: center; font-size: 11px; color: #888; margin-bottom: 4px; }
+
+  .status-line { text-align: center; font-size: 11px; margin-bottom: 2px; }
+  .dot-on  { color: green; }
+  .dot-off { color: red;   }
+
+  .ip-warn { text-align: center; font-size: 12px; margin: 6px 0; }
+  .ip-warn label { cursor: pointer; }
+  .ip-warn span  { color: red; text-decoration: underline; }
+
+  .field { margin: 6px 0; }
+  .field label { display: block; font-size: 12px; margin-bottom: 3px; }
+  .field input {
+    width: 100%;
+    padding: 5px 7px;
+    font-size: 13px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .field input:focus { outline: 1px solid #555; }
+  .field input.err   { border-color: red; }
+
+  /* password row with show/hide toggle */
+  .pass-row { display: flex; gap: 4px; }
+  .pass-row input { flex: 1; width: auto; }
+  .pass-row button {
+    padding: 5px 8px;
+    font-size: 11px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background: #f0f0f0;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .pass-row button:hover { background: #e0e0e0; }
+
+  input.code {
+    text-align: center;
+    letter-spacing: 4px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .codebox {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    padding: 6px;
+    border: 1px dashed #aaa;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 4px 0 2px;
+    background: #f9f9f9;
+  }
+  .codebox:hover    { background: #f0f0f0; }
+  .codehint         { text-align: center; font-size: 10px; color: #888; margin-bottom: 4px; }
+  .newcode-link     { text-align: right; font-size: 11px; color: #888; cursor: pointer; margin-bottom: 4px; }
+  .newcode-link:hover { color: #333; text-decoration: underline; }
+
+  .panel { display: none; }
+  .panel.on { display: block; }
+
+  button {
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+    background: #f0f0f0;
+  }
+  button:hover  { background: #e0e0e0; }
+  button:active { background: #ccc; }
+  button.primary {
+    background: #4CAF50;
+    color: #fff;
+    border: 1px solid #3a8a3e;
+    width: 100%;
+    margin-top: 4px;
+  }
+  button.primary:hover { background: #45a049; }
+
+  .btn-row { display: flex; gap: 8px; margin: 8px 0 4px; }
+  .btn-row button { flex: 1; }
+  .btn-row button.active { background: #555; color: #fff; border-color: #333; }
+
+  ul { padding-left: 20px; margin: 4px 0; }
+  ul li { font-size: 12px; margin: 2px 0; }
+  ul li a { color: #000; }
+</style>
+</head>
+<body>
+
+  <h1>🐧 PangLive Real-Time Collab</h1>
+
+  <div class="version"><strong><em>Pang Live Ver.0.1.0</em></strong></div>
+  <div class="alpha">Currently in a <u>very alpha alpha alpha</u> stage</div>
+
+  <div class="status-line" id="statusLine">
+    <span class="dot-off">●</span> Coordinator: <span id="statusText">checking…</span>
+  </div>
+
+  <hr>
+
+  <div class="ip-warn">
+    <label>
+      <input type="checkbox" id="ipCheck">
+      I understand that hosting or joining a session means
+      <span>my IP address is shared with others.</span>
+    </label>
+  </div>
+
+  <hr>
+
+  <div id="mainArea" style="opacity:0.4; pointer-events:none;">
+
+    <div class="field">
+      <label>Display name</label>
+      <input id="name" placeholder="Your name…" maxlength="15">
+    </div>
+
+    <div class="btn-row">
+      <button id="btn-join" class="active">Join Room</button>
+      <button id="btn-host">Host Room</button>
+    </div>
+
+    <!-- JOIN -->
+    <div class="panel on" id="p-join">
+      <div class="field">
+        <label>Room code</label>
+        <input class="code" id="code" placeholder="0000000000" maxlength="10">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <div class="pass-row">
+          <input type="password" id="jpass" placeholder="Password" maxlength="30">
+          <button id="toggle-jpass">Show</button>
+        </div>
+      </div>
+      <button class="primary" id="btn-do-join">Join Session</button>
+    </div>
+
+    <!-- HOST -->
+    <div class="panel" id="p-host">
+      <label style="font-size:12px;">Your room code</label>
+      <div class="codebox" id="codeBox">—</div>
+      <div class="codehint">Click to copy</div>
+      <div class="newcode-link" id="newCodeLink">↺ Generate new code</div>
+      <div class="field">
+        <label>Password <span style="color:red;font-size:10px;">(required · 6 chars)</span></label>
+        <div class="pass-row">
+          <input type="password" id="hpass" placeholder="Set a password…" maxlength="30">
+          <button id="toggle-hpass">Show</button>
+        </div>
+      </div>
+      <button class="primary" id="btn-do-host">Start Hosting</button>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <ul>
+    <li>Privacy Policy</li>
+    <li>Support Server</li>
+    <li>Donate to 7thImpact</li>
+    <li><a href="https://penguinmod.com/support" target="_blank"><span style="color:rgb(0, 81, 255);">Donate to PenguinMod</span></a></li>
+  </ul>
+
+  <script src="PangScript/PangLiveMenu.js"></script>
 </body>
+</html>

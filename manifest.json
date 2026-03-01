@@ -1,10 +1,19 @@
 {
   "name": "PangLive",
-  "description": "Real-Time PenguinMod Collaberation by 7thImpact",
+  "description": "Real-Time PenguinMod Collaboration by 7thImpact",
   "version": "0.1.0",
   "manifest_version": 3,
   "action": {
     "default_popup": "PangLive.html",
     "default_icon": "PangLive.png"
-  }
+  },
+  "permissions": ["activeTab"],
+  "host_permissions": ["https://studio.penguinmod.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://studio.penguinmod.com/editor.html*"],
+      "js": ["content_script.js"],
+      "run_at": "document_end"
+    }
+  ]
 }
