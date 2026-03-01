@@ -2,6 +2,13 @@
 // LESSON: One file controls ALL menus. We switch by changing currentPanel.innerHTML
 
 console.log('%c🐧 PangLive FULL GUI v0.2 — all your menus connected!', 'color:#4CAF50; font-weight:bold; font-size:16px');
+let settingsState = {
+  penguinOnly: false,
+  spectator: false,
+  manualApprove: false,
+  dangerous: false,
+  maxUsers: "2"
+};
 
 function addLeftPangButton() {
   if (document.getElementById('panglive-left-btn')) return true;
@@ -33,6 +40,8 @@ function showMainMenu() {
     width: 320px; height: 520px; background: #5bb6b6; border: 12px solid #111;
     border-radius: 40px; overflow: hidden; z-index: 9999999; font-family: sans-serif;
     color: #111; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    overflow-y: auto;
+    padding-bottom: 40px;
   `;
 
   currentPanel.innerHTML = `
@@ -97,28 +106,7 @@ function showCreateRoom() {
 
 // ── HOST MENU (your Host_Menu.html) ──
 function showHostMenu() {
-  currentPanel.innerHTML = `
-    <div style="padding: 0px 20px; font-size: 22px; font-weight: bold; text-align: center;">&nbsp;</div>
-    <div style="padding: 0px 20px; font-size: 22px; font-weight: bold; text-align: center;">PangLive <span style="font-size: 14px; opacity: 0.7;">V.0.1.0</span></div>
-    <div style="padding-top: 0px; padding-right: 0px; padding-bottom: 0px; font-size: 22px; font-weight: bold; text-align: center;"><span style="font-size: 12px; opacity: 0.7;">Alpha Channel</span></div>
-    <div style="padding-top: 0px; padding-right: 0px; padding-bottom: 0px; font-size: 22px; font-weight: bold; text-align: center;"><hr /><em><strong>Host Menu</strong></em></div>
-    <p style="text-align: center;"><button id="return-from-host" type="button">Return</button></p>
-    <hr />
-    <p style="text-align: left;">[ROOM UPTIME]<br />[TOTAL BLOCK CHANGES]</p>
-    <p style="text-align: left;"><button id="close-room-btn" type="button">Close Room</button></p>
-    <p style="text-align: left;"><button id="toggle-join-btn" type="button">Disable/Re-enable Joining</button></p>
-    <hr />
-    <p style="text-align: left; padding-left: 30px;">[PENGUINMOD PROFILE PICTURE] [USERNAME]</p>
-    <p style="text-align: left; padding-left: 60px;">[BLOCK CHANGES] <br />[TIME IN SESSION]<br />[PING]</p>
-    <p style="text-align: left; padding-left: 30px;">- [PERMISSIONS] [REPORT] [KICK] [BAN]</p>
-    <hr />
-    <p style="text-align: left;">&nbsp;<span style="padding: 0px 20px;">💵 Donate to PenguinMod</span>&nbsp;</p>
-    <p style="text-align: left;"><span style="padding: 0px 24.5px;">☕ Donate to 7thImpact</span></p>
-    <hr />
-    <p style="padding: 0px 20px; text-align: left;">GitHub Repository</p>
-    <p style="padding: 0px 20px; text-align: left;">Support Server</p>
-    <p style="padding: 0px 20px; text-align: left;">Privacy Policy</p>
-  `;
+  currentPanel.innerHTML = "HTML Extras\Create_Menu.html";
 
   document.getElementById('return-from-host').addEventListener('click', showMainMenu);
   document.getElementById('close-room-btn').addEventListener('click', () => {
@@ -156,25 +144,38 @@ function showJoinMenu() {
 // ── SETTINGS MENU (your Settings_Menu.html) ──
 function showSettingsMenu() {
   currentPanel.innerHTML = `
-    <div style="padding: 0px 20px; font-size: 22px; font-weight: bold; text-align: center;">&nbsp;</div>
-    <div style="padding: 0px 20px; font-size: 22px; font-weight: bold; text-align: center;">PangLive <span style="font-size: 14px; opacity: 0.7;">V.0.1.0</span></div>
-    <div style="padding-top: 0px; padding-right: 0px; padding-bottom: 0px; font-size: 22px; font-weight: bold; text-align: center;"><span style="font-size: 12px; opacity: 0.7;">Alpha Channel</span></div>
-    <div style="padding-top: 0px; padding-right: 0px; padding-bottom: 0px; font-size: 22px; font-weight: bold; text-align: center;"><hr /><em><strong>Settings Menu</strong></em></div>
-    <p style="text-align: center;"><button id="return-from-settings" type="button">Return</button></p>
-    <hr />
-    <p style="text-align: left;"><label>Max Users Per Session<br><span style="font-size:12px;">(2-4 Users) <span style="color:#ff0000;">(Enable Dangerous Settings for 2-10)</span></span></label></p>
-    <p style="text-align: left;"><input type="text" /></p>
-    <p style="text-align: left;"><input type="checkbox" /> PenguinMod Users Only?</p>
-    <p style="text-align: left;"><input type="checkbox" /> Everyone Joins as a Spectator?</p>
-    <p style="text-align: left;"><input type="checkbox" /> Manually Approve Joins?</p>
-    <p style="text-align: left;"><input type="checkbox" /> Enable Dangerous Settings?</p>
-    <hr />
-    <p style="text-align: left;">&nbsp;<span style="padding: 0px 20px;">💵 Donate to PenguinMod</span>&nbsp;</p>
-    <p style="text-align: left;"><span style="padding: 0px 24.5px;">☕ Donate to 7thImpact</span></p>
-    <hr />
-    <p style="padding: 0px 20px; text-align: left;">GitHub Repository</p>
-    <p style="padding: 0px 20px; text-align: left;">Support Server</p>
-    <p style="padding: 0px 20px; text-align: left;">Privacy Policy</p>
+        <div style="padding: 0px 20px; font-size: 22px; font-weight: bold; text-align: center;">&nbsp;</div>
+        <div style="padding: 0px 20px; font-size: 22px; font-weight: bold; text-align: center;">PangLive <span style="font-size: 14px; opacity: 0.7;">V.0.1.0</span></div>
+        <div style="padding-top: 0px; padding-right: 0px; padding-bottom: 0px; font-size: 22px; font-weight: bold; text-align: center;"><span style="font-size: 12px; opacity: 0.7;">Alpha Channel</span></div>
+        <div style="padding-top: 0px; padding-right: 0px; padding-bottom: 0px; font-size: 22px; font-weight: bold; text-align: center;"><hr style="font-size: 22px;" /><em><strong>Settings Menu</strong></em></div>
+        <p style="text-align: center;"><button id="return-from-settings" type="button">Return</button></p>
+        <hr />
+        <p style="text-align: left; padding-left: 30px;"><label for="item"> Max Users Per Session<br /><span style="font-size: 12px;">(2-4 Users) <span style="color: #ff0000;">(Enable Dangerous Settings for 2-10)</span></span></label></p>
+        <p style="text-align: left; padding-left: 30px;"><input id="item" name="item" type="text" /></p>
+        <p style="text-align: left;">&nbsp;</p>
+        <p style="text-align: left; padding-left: 30px;">&nbsp;<input id="item" name="item" type="checkbox" value="item" />&nbsp;PenguinMod Users Only?</p>
+        <ul>
+        <li style="text-align: left;"><span style="font-size: 12px;">Only allows signed-in PeguinMod Users to join your room.</span></li>
+        </ul>
+        <p style="text-align: left; padding-left: 30px;">&nbsp;<input id="item" name="item" type="checkbox" value="item" />&nbsp;Everyone Joins as a Spectator?</p>
+        <ul>
+        <li style="text-align: left;"><span style="font-size: 12px;">When anyone joins, they won't have editor permissions by default</span></li>
+        </ul>
+        <p style="text-align: left; padding-left: 30px;">&nbsp;<input id="item" name="item" type="checkbox" value="item" />&nbsp;Manually Approve Joins?</p>
+        <ul>
+        <li style="text-align: left;"><span style="font-size: 12px;">You have to approve the Username/Nickname of the person joining before they are handed your IP information to join.</span></li>
+        </ul>
+        <p style="text-align: left; padding-left: 30px;">&nbsp;<input id="item" name="item" type="checkbox" value="item" />&nbsp;Enable Dangerous Settings?</p>
+        <ul>
+        <li style="text-align: left;"><span style="font-size: 12px;">Let's you push the limits of my silly thingy</span></li>
+        </ul>
+        <hr />
+        <p style="text-align: left;">&nbsp;<span style="padding: 0px 20px;">💵 Donate to PenguinMod</span>&nbsp;</p>
+        <p style="text-align: left;"><span style="padding: 0px 24.5px;">☕ Donate to 7thImpact</span></p>
+        <hr />
+        <p style="padding: 0px 20px; text-align: left;">GitHub Repository</p>
+        <p style="padding: 0px 20px; text-align: left;">Support Server</p>
+        <p style="padding: 0px 20px; text-align: left;">Privacy Policy</p>
   `;
 
   document.getElementById('return-from-settings').addEventListener('click', showMainMenu);
