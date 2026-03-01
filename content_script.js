@@ -129,7 +129,7 @@ function addRightOnlineWidget() {
   const widget = document.createElement('div');
   widget.id = 'panglive-right-widget';
   widget.style.cssText = `
-    position:absolute; top:12px; right:260px; z-index:999999;
+    position:absolute; top:6px; right:260px; z-index:999999;
     display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1);
     color:white; padding:4px 12px; border-radius:20px; font-size:13px; font-weight:600;
   `;
