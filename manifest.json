@@ -1,0 +1,10 @@
+{
+  "name": "PangLive",
+  "description": "Real-Time PenguinMod Collaberation by 7thImpact",
+  "version": "0.1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "PangLive.html",
+    "default_icon": "PangLive.png"
+  }
+}
