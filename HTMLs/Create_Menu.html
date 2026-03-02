@@ -2,20 +2,22 @@
 <div style="padding: 0px 20px; font-size: 22px; font-weight: bold; text-align: center;">PangLive <span style="font-size: 14px; opacity: 0.7;">V.0.1.0</span></div>
 <div style="padding-top: 0px; padding-right: 0px; padding-bottom: 0px; font-size: 22px; font-weight: bold; text-align: center;"><span style="font-size: 12px; opacity: 0.7;">Alpha Channel</span></div>
 <div style="padding-top: 0px; padding-right: 0px; padding-bottom: 0px; font-size: 22px; font-weight: bold; text-align: center;"><hr style="font-size: 22px;" /><strong><em>Create Room</em></strong></div>
-<p style="text-align: center;"><button type="button">Return</button></p>
+<p style="text-align: center;"><button id="return-from-create" type="button">Return</button></p>
 <hr /><!-- Hide or Replace username if signed into PenguinMod -->
-<p><label for="username">Username:</label> <input id="username" name="username" type="text" />&nbsp;</p>
-<p><label for="username">Set Room Password:</label> <input id="username" name="username" type="text" /></p>
-<!-- Limit the password to 32 characters  -->
+<p style="padding-left: 30px; text-align: left;"><label for="create-username">Username:</label></p>
+<p style="padding-left: 30px; text-align: left;"><input id="create-username" name="username" type="text" />&nbsp;</p>
+<p style="padding-left: 30px; text-align: left;"><label for="create-password">Set Room Password:</label></p>
+<p style="padding-left: 30px; text-align: left;"><input id="create-password" maxlength="32" name="password" type="password" /></p>
+<!-- Limit the password to 32 characters -->
 <ul>
-<li><span style="font-size: 12px;">Remember, this password is the one thing (besides manual joins) stopping other people (outside of the coordinator server) from accessing your IP. Please make it good.</span></li>
-<li><span style="font-size: 12px;">Does have a 32-character limit</span></li>
+<li style="text-align: left;"><span style="font-size: 12px;">Remember, this password is the one thing (besides manual joins) stopping other people (outside of the coordinator server) from accessing your IP. Please make it good.</span></li>
+<li style="text-align: left;"><span style="font-size: 12px;">Does have a 32-character limit</span></li>
 </ul>
-<p style="text-align: left;"><button type="button">Create Room</button></p>
+<p style="padding-left: 30px; text-align: left;"><button id="create-room-btn" type="button">Create Room</button></p>
 <hr />
-<p>Coordinator Up? [TRUE/FALSE]<br />Coordinator Ping [PING]</p>
+<p style="text-align: left; padding-left: 30px;">Coordinator Up? [TRUE/FALSE]<br />Coordinator Ping [PING]</p>
 <ul>
-<li><span style="font-size: 12px;">If your ping to the server is greater than 250ms, you maybe shouldn't be the host.</span></li>
+<li style="text-align: left;"><span style="font-size: 12px;">If your ping to the server is greater than 250ms, you maybe shouldn't be the host.</span></li>
 </ul>
 <hr />
 <p style="text-align: left;">&nbsp;<span style="padding: 0px 20px;">💵 Donate to PenguinMod</span>&nbsp;</p>
