@@ -14,6 +14,12 @@
       "matches": ["https://studio.penguinmod.com/editor.html*"],
       "js": ["content_script.js"],
       "run_at": "document_end"
-    }
-  ]
+    }],
+    "web_accessible_resources": [
+  {
+    "resources": ["HTMLs/*.html"],
+    "matches": ["<all_urls>"]
+  }
+]
+  
 }
